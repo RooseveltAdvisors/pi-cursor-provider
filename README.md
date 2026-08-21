@@ -388,6 +388,7 @@ Image input will be enabled automatically if a future Cursor CLI version adds an
 | `No models available` | Cursor CLI cannot reach the API | Check internet connection and `agent status` |
 | Error on a specific model | Model not in your subscription | Run `agent models` to see available models |
 | NDJSON parse errors | Unexpected CLI output | Check stderr; update Cursor Agent CLI |
+| `Auto-compaction failed: … spawn E2BIG` | Prompt was passed as argv on Linux (>131072 bytes) | Upgrade to ≥0.1.5 (stdin transport); restart Pi / reload the provider — existing session files are preserved |
 
 ---
 
