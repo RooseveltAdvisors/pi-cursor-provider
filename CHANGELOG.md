@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.5]
+
+### Fixed
+
+- **Linux `spawn E2BIG` on long sessions / auto-compaction**: deliver the Cursor Agent `--print` prompt on stdin instead of a single argv string. Linux rejects one argv longer than `MAX_ARG_STRLEN` (131072 bytes); large Pi transcripts (including compaction summarization) hit that limit and surface as `Auto-compaction failed: Summarization failed: spawn E2BIG`.
+
+### Added
+
+- Behavioral regression `npm run test:e2big` covering argv failure and stdin success above 131072 bytes.
+
 ## [0.1.2]
 
 ### Added
