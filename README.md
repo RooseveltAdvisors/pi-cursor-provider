@@ -234,10 +234,11 @@ pi -e npm:@netandreus/pi-cursor-provider --provider cursor --model auto
 Each Pi turn spawns a Cursor Agent CLI subprocess:
 
 ```
-agent --print --output-format stream-json --model <id> --trust --workspace <cwd> "<prompt>"
+agent --print --output-format stream-json --model <id> --trust --workspace <cwd>
+# prompt body is written to the child's stdin (not argv)
 ```
 
-The extension serialises the Pi conversation (system prompt + message history) into a single text prompt that is passed to the CLI. The CLI's NDJSON stdout is read line-by-line; `type: "assistant"` events are mapped to Pi stream events (`text_start`, `text_delta`, `text_end`, `done`).
+The extension serialises the Pi conversation (system prompt + message history) into a single text prompt and delivers it on stdin. Putting the prompt in argv hits Linux `MAX_ARG_STRLEN` (131072) on long sessions and breaks auto-compaction with `spawn E2BIG`. The CLI's NDJSON stdout is read line-by-line; `type: "assistant"` events are mapped to Pi stream events (`text_start`, `text_delta`, `text_end`, `done`).
 
 - **Multi-turn context**: The full message history is serialised as a prefixed transcript (`[User] / [Assistant] / [Tool result]`) and sent as a single prompt. Cursor manages its own internal conversation from that point.
 - **Token usage**: Cursor CLI does not expose token counts; usage is reported as 0.

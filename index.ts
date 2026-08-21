@@ -333,9 +333,33 @@ function runAgentModels(agentPath: string): Promise<CursorModelDef[]> {
 // ---------------------------------------------------------------------------
 // Prompt serialisation
 // Serialises the Pi context into a single text prompt for the CLI.
-// Cursor CLI receives the conversation as one -p "..." argument; multi-turn
-// history is included as a prefixed transcript (best-effort).
+// The prompt is delivered on stdin (not argv): a single Linux argv cannot
+// exceed MAX_ARG_STRLEN (131072), and long Pi sessions hit that during
+// auto-compaction summarization. Multi-turn history is a prefixed transcript.
 // ---------------------------------------------------------------------------
+
+/**
+ * Linux rejects a single argv string longer than MAX_ARG_STRLEN (131072 bytes).
+ * Long Pi sessions (especially auto-compaction summarization) exceed that when
+ * the full transcript is passed as a CLI prompt argument, producing
+ * `spawn E2BIG` and "Auto-compaction failed: Summarization failed: spawn E2BIG".
+ * Always deliver the print prompt on stdin instead of argv.
+ */
+function spawnAgentPrint(
+  agentPath: string,
+  args: string[],
+  prompt: string,
+  env: NodeJS.ProcessEnv = process.env,
+): ReturnType<typeof spawn> {
+  const child = spawn(agentPath, args, {
+    stdio: ["pipe", "pipe", "pipe"],
+    env,
+  });
+  // Ignore EPIPE when the child exits before draining stdin.
+  child.stdin?.on("error", () => {});
+  child.stdin?.end(prompt, "utf8");
+  return child;
+}
 
 /**
  * Convert a content block (text or image) to a plain string for the CLI prompt.
@@ -511,13 +535,13 @@ function streamCursorCli(
       const reasoningLevel = (options as { reasoning?: string })?.reasoning;
       const cliModelId = toCursorId(model.id, reasoningLevel);
 
+      // Prompt stays off argv — see spawnAgentPrint / Linux MAX_ARG_STRLEN.
       const args = [
         "--print",
         "--output-format", "stream-json",
         "--model", cliModelId,
         "--trust",
         "--workspace", workspacePath,
-        prompt,
       ];
 
       if (process.env["CURSOR_API_KEY"]) {
@@ -526,10 +550,7 @@ function streamCursorCli(
 
       stream.push({ type: "start", partial: output });
 
-      const child = spawn(agentPath, args, {
-        stdio: ["ignore", "pipe", "pipe"],
-        env: process.env,
-      });
+      const child = spawnAgentPrint(agentPath, args, prompt);
 
       const onAbort = () => {
         child.kill("SIGTERM");
