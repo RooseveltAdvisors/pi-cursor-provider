@@ -46,7 +46,9 @@
     "lint": "npx biome check",
     "format": "npx biome check --write",
     "typecheck": "npx tsc --noEmit",
-    "test:e2big": "node tests/stdin-prompt-e2big.mjs"
+    "test:e2big": "node tests/stdin-prompt-e2big.mjs",
+    "test:system-prompt": "node tests/system-prompt-transcript.mjs",
+    "test": "npm run test:e2big && npm run test:system-prompt"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.2",
