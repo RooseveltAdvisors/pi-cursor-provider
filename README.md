@@ -252,6 +252,8 @@ When the Cursor CLI uses tools (Read, Write, Shell, Grep, Ls, Glob, etc.) during
 
 The **Cursor CLI executes all tools** itself — Pi only observes and displays them. Tool arguments and results originate in the Cursor agent's execution environment, not in Pi's tool system.
 
+Markers are human-readable: `⏳ [Shell] <command>` when a call starts, `✓ [Shell] exit 0 · 128ms` plus the short output when it finishes, and `✗ [Shell] blocked` when the CLI refuses it. Completed results are shown as text markers rather than Pi tool-result events, because the Cursor CLI's own agent loop owns execution inside a single Pi turn.
+
 Supported Cursor CLI tools that appear in Pi's output:
 
 | CLI event key | Display name |

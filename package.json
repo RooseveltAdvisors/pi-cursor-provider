@@ -1,6 +1,6 @@
 {
   "name": "@netandreus/pi-cursor-provider",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "author": {
     "name": "Andrei Tokarchuk ",
     "email": "netandreus@gmail.com",
@@ -48,7 +48,8 @@
     "typecheck": "npx tsc --noEmit",
     "test:e2big": "node tests/stdin-prompt-e2big.mjs",
     "test:system-prompt": "node tests/system-prompt-transcript.mjs",
-    "test": "npm run test:e2big && npm run test:system-prompt"
+    "test:tool-markers": "node tests/tool-markers.mjs",
+    "test": "npm run test:e2big && npm run test:system-prompt && npm run test:tool-markers"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.2",
