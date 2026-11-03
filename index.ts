@@ -46,52 +46,1910 @@ interface CursorModelDef {
  * Static fallback list. Used when `agent models` fails or times out, and as
  * an attribute lookup table for models discovered dynamically.
  *
- * Source: `agent models` output (Cursor Agent CLI v2026.02.13-41ac335).
+ * Source: `agent models` output (Cursor Agent CLI v2026.10.22-27dcf5f).
  */
 const STATIC_MODELS: CursorModelDef[] = [
   // Auto
-  { id: "auto", name: "Auto", reasoning: false, contextWindow: 200000, maxTokens: 32768 },
+  {
+    id: "auto",
+    name: "Auto",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  // GPT
+  {
+    id: "gpt-5.3-codex-low",
+    name: "Codex 5.3 Low",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.3-codex-low-fast",
+    name: "Codex 5.3 Low Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.3-codex",
+    name: "Codex 5.3",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.3-codex-fast",
+    name: "Codex 5.3 Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.3-codex-high",
+    name: "Codex 5.3 High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.3-codex-high-fast",
+    name: "Codex 5.3 High Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.3-codex-xhigh",
+    name: "Codex 5.3 Extra High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.3-codex-xhigh-fast",
+    name: "Codex 5.3 Extra High Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.2",
+    name: "GPT-5.2",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-sol-high",
+    name: "GPT-5.6 Sol 1M High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-sol-high-fast",
+    name: "GPT-5.6 Sol 1M High Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-sol-xhigh",
+    name: "GPT-5.6 Sol 1M Extra High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-sol-xhigh-fast",
+    name: "GPT-5.6 Sol 1M Extra High Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-luna-high",
+    name: "GPT-5.6 Luna 1M High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-sol-none",
+    name: "GPT-5.6 Sol 1M None",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-sol-none-fast",
+    name: "GPT-5.6 Sol 1M None Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-sol-low",
+    name: "GPT-5.6 Sol 1M Low",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-sol-low-fast",
+    name: "GPT-5.6 Sol 1M Low Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-sol-medium",
+    name: "GPT-5.6 Sol 1M",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-sol-medium-fast",
+    name: "GPT-5.6 Sol 1M Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-sol-max",
+    name: "GPT-5.6 Sol 1M Max",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-sol-max-fast",
+    name: "GPT-5.6 Sol 1M Max Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.5-none",
+    name: "GPT-5.5 1M None",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.5-none-fast",
+    name: "GPT-5.5 None Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.5-low",
+    name: "GPT-5.5 1M Low",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.5-low-fast",
+    name: "GPT-5.5 Low Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.5-medium",
+    name: "GPT-5.5 1M",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.5-medium-fast",
+    name: "GPT-5.5 Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.5-high",
+    name: "GPT-5.5 1M High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.5-high-fast",
+    name: "GPT-5.5 High Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.5-extra-high",
+    name: "GPT-5.5 1M Extra High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.5-extra-high-fast",
+    name: "GPT-5.5 Extra High Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-terra-none",
+    name: "GPT-5.6 Terra 1M None",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-terra-none-fast",
+    name: "GPT-5.6 Terra 1M None Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-terra-low",
+    name: "GPT-5.6 Terra 1M Low",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-terra-low-fast",
+    name: "GPT-5.6 Terra 1M Low Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-terra-medium",
+    name: "GPT-5.6 Terra 1M",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-terra-medium-fast",
+    name: "GPT-5.6 Terra 1M Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-terra-high",
+    name: "GPT-5.6 Terra 1M High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-terra-high-fast",
+    name: "GPT-5.6 Terra 1M High Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-terra-xhigh",
+    name: "GPT-5.6 Terra 1M Extra High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-terra-xhigh-fast",
+    name: "GPT-5.6 Terra 1M Extra High Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-terra-max",
+    name: "GPT-5.6 Terra 1M Max",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-terra-max-fast",
+    name: "GPT-5.6 Terra 1M Max Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-low",
+    name: "GPT-5.4 1M Low",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-medium",
+    name: "GPT-5.4 1M",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-medium-fast",
+    name: "GPT-5.4 Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-high",
+    name: "GPT-5.4 1M High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-high-fast",
+    name: "GPT-5.4 High Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-xhigh",
+    name: "GPT-5.4 1M Extra High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-xhigh-fast",
+    name: "GPT-5.4 Extra High Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.2-low",
+    name: "GPT-5.2 Low",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.2-low-fast",
+    name: "GPT-5.2 Low Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.2-fast",
+    name: "GPT-5.2 Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.2-high",
+    name: "GPT-5.2 High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.2-high-fast",
+    name: "GPT-5.2 High Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.2-xhigh",
+    name: "GPT-5.2 Extra High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.2-xhigh-fast",
+    name: "GPT-5.2 Extra High Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-luna-none",
+    name: "GPT-5.6 Luna 1M None",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-luna-none-fast",
+    name: "GPT-5.6 Luna 1M None Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-luna-low",
+    name: "GPT-5.6 Luna 1M Low",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-luna-low-fast",
+    name: "GPT-5.6 Luna 1M Low Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-luna-medium",
+    name: "GPT-5.6 Luna 1M",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-luna-medium-fast",
+    name: "GPT-5.6 Luna 1M Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-luna-high-fast",
+    name: "GPT-5.6 Luna 1M High Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-luna-xhigh",
+    name: "GPT-5.6 Luna 1M Extra High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-luna-xhigh-fast",
+    name: "GPT-5.6 Luna 1M Extra High Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-luna-max",
+    name: "GPT-5.6 Luna 1M Max",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.6-luna-max-fast",
+    name: "GPT-5.6 Luna 1M Max Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-mini-none",
+    name: "GPT-5.4 Mini None",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-mini-low",
+    name: "GPT-5.4 Mini Low",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-mini-medium",
+    name: "GPT-5.4 Mini",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-mini-high",
+    name: "GPT-5.4 Mini High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-mini-xhigh",
+    name: "GPT-5.4 Mini Extra High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-nano-none",
+    name: "GPT-5.4 Nano None",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-nano-low",
+    name: "GPT-5.4 Nano Low",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-nano-medium",
+    name: "GPT-5.4 Nano",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-nano-high",
+    name: "GPT-5.4 Nano High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.4-nano-xhigh",
+    name: "GPT-5.4 Nano Extra High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.1-low",
+    name: "GPT-5.1 Low",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.1",
+    name: "GPT-5.1",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5.1-high",
+    name: "GPT-5.1 High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "gpt-5-mini",
+    name: "GPT-5 Mini",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
   // Composer
-  { id: "composer-1.5", name: "Composer 1.5", reasoning: false, contextWindow: 200000, maxTokens: 32768 },
-  { id: "composer-1", name: "Composer 1", reasoning: false, contextWindow: 200000, maxTokens: 32768 },
-  // Claude Opus
-  { id: "opus-4.6-thinking", name: "Claude 4.6 Opus (Thinking)", reasoning: true, contextWindow: 200000, maxTokens: 32000 },
-  { id: "opus-4.6", name: "Claude 4.6 Opus", reasoning: false, contextWindow: 200000, maxTokens: 32000 },
-  { id: "opus-4.5-thinking", name: "Claude 4.5 Opus (Thinking)", reasoning: true, contextWindow: 200000, maxTokens: 32000 },
-  { id: "opus-4.5", name: "Claude 4.5 Opus", reasoning: false, contextWindow: 200000, maxTokens: 32000 },
-  // Claude Sonnet
-  { id: "sonnet-4.6-thinking", name: "Claude 4.6 Sonnet (Thinking)", reasoning: true, contextWindow: 200000, maxTokens: 32000 },
-  { id: "sonnet-4.6", name: "Claude 4.6 Sonnet", reasoning: false, contextWindow: 200000, maxTokens: 32000 },
-  { id: "sonnet-4.5-thinking", name: "Claude 4.5 Sonnet (Thinking)", reasoning: true, contextWindow: 200000, maxTokens: 32000 },
-  { id: "sonnet-4.5", name: "Claude 4.5 Sonnet", reasoning: false, contextWindow: 200000, maxTokens: 32000 },
-  // GPT-5 series
-  { id: "gpt-5.3-codex", name: "GPT-5.3 Codex", reasoning: false, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.3-codex-low", name: "GPT-5.3 Codex Low", reasoning: false, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.3-codex-high", name: "GPT-5.3 Codex High", reasoning: true, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.3-codex-xhigh", name: "GPT-5.3 Codex Extra High", reasoning: true, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.3-codex-fast", name: "GPT-5.3 Codex Fast", reasoning: false, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.3-codex-low-fast", name: "GPT-5.3 Codex Low Fast", reasoning: false, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.3-codex-high-fast", name: "GPT-5.3 Codex High Fast", reasoning: true, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.3-codex-xhigh-fast", name: "GPT-5.3 Codex Extra High Fast", reasoning: true, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.2", name: "GPT-5.2", reasoning: false, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.2-high", name: "GPT-5.2 High", reasoning: true, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.2-codex", name: "GPT-5.2 Codex", reasoning: false, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.2-codex-high", name: "GPT-5.2 Codex High", reasoning: true, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.2-codex-low", name: "GPT-5.2 Codex Low", reasoning: false, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.2-codex-xhigh", name: "GPT-5.2 Codex Extra High", reasoning: true, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.2-codex-fast", name: "GPT-5.2 Codex Fast", reasoning: false, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.2-codex-high-fast", name: "GPT-5.2 Codex High Fast", reasoning: true, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.2-codex-low-fast", name: "GPT-5.2 Codex Low Fast", reasoning: false, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.2-codex-xhigh-fast", name: "GPT-5.2 Codex Extra High Fast", reasoning: true, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.1-high", name: "GPT-5.1 High", reasoning: true, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.1-codex-max", name: "GPT-5.1 Codex Max", reasoning: true, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.1-codex-max-high", name: "GPT-5.1 Codex Max High", reasoning: true, contextWindow: 200000, maxTokens: 32768 },
-  { id: "gpt-5.1-codex-mini", name: "GPT-5.1 Codex Mini", reasoning: false, contextWindow: 200000, maxTokens: 32768 },
+  {
+    id: "composer-2.5",
+    name: "Composer 2.5",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "composer-2.5-fast",
+    name: "Composer 2.5 Fast",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  // Claude
+  {
+    id: "claude-opus-5-thinking-high",
+    name: "Claude Opus 5 1M Thinking",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-thinking-high-fast",
+    name: "Claude Opus 5 1M Thinking Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-thinking-high",
+    name: "Claude Fable 5 1M Thinking (NO ZDR)",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-thinking-xhigh",
+    name: "Claude Fable 5 1M Extra High Thinking (NO ZDR)",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-sonnet-5-thinking-high",
+    name: "Claude Sonnet 5 1M Thinking",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-sonnet-5-thinking-xhigh",
+    name: "Claude Sonnet 5 1M Extra High Thinking",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-5-low",
+    name: "Claude Opus 5.5 1M Low",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-5-low-fast",
+    name: "Claude Opus 5.5 1M Low Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-5-medium",
+    name: "Claude Opus 5.5 1M",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-5-medium-fast",
+    name: "Claude Opus 5.5 1M Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-5-high",
+    name: "Claude Opus 5.5 1M High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-5-high-fast",
+    name: "Claude Opus 5.5 1M High Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-5-xhigh",
+    name: "Claude Opus 5.5 1M Extra High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-5-xhigh-fast",
+    name: "Claude Opus 5.5 1M Extra High Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-5-max",
+    name: "Claude Opus 5.5 1M Max",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-5-max-fast",
+    name: "Claude Opus 5.5 1M Max Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-low",
+    name: "Claude Opus 5 1M Low",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-low-fast",
+    name: "Claude Opus 5 1M Low Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-medium",
+    name: "Claude Opus 5 1M Medium",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-medium-fast",
+    name: "Claude Opus 5 1M Medium Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-high",
+    name: "Claude Opus 5 1M",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-high-fast",
+    name: "Claude Opus 5 1M Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-thinking-low",
+    name: "Claude Opus 5 1M Low Thinking",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-thinking-low-fast",
+    name: "Claude Opus 5 1M Low Thinking Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-thinking-medium",
+    name: "Claude Opus 5 1M Medium Thinking",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-thinking-medium-fast",
+    name: "Claude Opus 5 1M Medium Thinking Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-thinking-xhigh",
+    name: "Claude Opus 5 1M Extra High Thinking",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-thinking-xhigh-fast",
+    name: "Claude Opus 5 1M Extra High Thinking Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-thinking-max",
+    name: "Claude Opus 5 1M Max Thinking",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-5-thinking-max-fast",
+    name: "Claude Opus 5 1M Max Thinking Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-low",
+    name: "Claude Opus 4.8 1M Low",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-low-fast",
+    name: "Claude Opus 4.8 1M Low Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-medium",
+    name: "Claude Opus 4.8 1M Medium",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-medium-fast",
+    name: "Claude Opus 4.8 1M Medium Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-high",
+    name: "Claude Opus 4.8 1M",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-high-fast",
+    name: "Claude Opus 4.8 1M Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-xhigh",
+    name: "Claude Opus 4.8 1M Extra High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-xhigh-fast",
+    name: "Claude Opus 4.8 1M Extra High Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-max",
+    name: "Claude Opus 4.8 1M Max",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-max-fast",
+    name: "Claude Opus 4.8 1M Max Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-thinking-low",
+    name: "Claude Opus 4.8 1M Low Thinking",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-thinking-low-fast",
+    name: "Claude Opus 4.8 1M Low Thinking Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-thinking-medium",
+    name: "Claude Opus 4.8 1M Medium Thinking",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-thinking-medium-fast",
+    name: "Claude Opus 4.8 1M Medium Thinking Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-thinking-high",
+    name: "Claude Opus 4.8 1M Thinking",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-thinking-high-fast",
+    name: "Claude Opus 4.8 1M Thinking Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-thinking-xhigh",
+    name: "Claude Opus 4.8 1M Extra High Thinking",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-thinking-xhigh-fast",
+    name: "Claude Opus 4.8 1M Extra High Thinking Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-thinking-max",
+    name: "Claude Opus 4.8 1M Max Thinking",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-8-thinking-max-fast",
+    name: "Claude Opus 4.8 1M Max Thinking Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-1-low",
+    name: "Claude Fable 5.1 1M Low (NO ZDR)",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-1-medium",
+    name: "Claude Fable 5.1 1M Medium (NO ZDR)",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-1-high",
+    name: "Claude Fable 5.1 1M (NO ZDR)",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-1-xhigh",
+    name: "Claude Fable 5.1 1M Extra High (NO ZDR)",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-1-max",
+    name: "Claude Fable 5.1 1M Max (NO ZDR)",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-1-thinking-low",
+    name: "Claude Fable 5.1 1M Low Thinking (NO ZDR)",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-1-thinking-medium",
+    name: "Claude Fable 5.1 1M Medium Thinking (NO ZDR)",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-1-thinking-high",
+    name: "Claude Fable 5.1 1M Thinking (NO ZDR)",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-1-thinking-xhigh",
+    name: "Claude Fable 5.1 1M Extra High Thinking (NO ZDR)",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-1-thinking-max",
+    name: "Claude Fable 5.1 1M Max Thinking (NO ZDR)",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-low",
+    name: "Claude Fable 5 1M Low (NO ZDR)",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-medium",
+    name: "Claude Fable 5 1M Medium (NO ZDR)",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-high",
+    name: "Claude Fable 5 1M (NO ZDR)",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-xhigh",
+    name: "Claude Fable 5 1M Extra High (NO ZDR)",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-max",
+    name: "Claude Fable 5 1M Max (NO ZDR)",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-thinking-low",
+    name: "Claude Fable 5 1M Low Thinking (NO ZDR)",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-thinking-medium",
+    name: "Claude Fable 5 1M Medium Thinking (NO ZDR)",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-fable-5-thinking-max",
+    name: "Claude Fable 5 1M Max Thinking (NO ZDR)",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-sonnet-5-5-low",
+    name: "Claude Sonnet 5.5 Low",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-sonnet-5-5-medium",
+    name: "Claude Sonnet 5.5 Medium",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-sonnet-5-5-high",
+    name: "Claude Sonnet 5.5 High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-sonnet-5-5-xhigh",
+    name: "Claude Sonnet 5.5 Extra High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-sonnet-5-5-max",
+    name: "Claude Sonnet 5.5 Max",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-sonnet-5-low",
+    name: "Claude Sonnet 5 1M Low",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-sonnet-5-medium",
+    name: "Claude Sonnet 5 1M Medium",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-sonnet-5-high",
+    name: "Claude Sonnet 5 1M",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-sonnet-5-xhigh",
+    name: "Claude Sonnet 5 1M Extra High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-sonnet-5-max",
+    name: "Claude Sonnet 5 1M Max",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-sonnet-5-thinking-low",
+    name: "Claude Sonnet 5 1M Low Thinking",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-sonnet-5-thinking-medium",
+    name: "Claude Sonnet 5 1M Medium Thinking",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-sonnet-5-thinking-max",
+    name: "Claude Sonnet 5 1M Max Thinking",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-4.6-sonnet-medium",
+    name: "Claude Sonnet 4.6 1M",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-4.6-sonnet-medium-thinking",
+    name: "Claude Sonnet 4.6 1M Thinking",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-low",
+    name: "Claude Opus 4.7 1M Low",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-low-fast",
+    name: "Claude Opus 4.7 1M Low Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-medium",
+    name: "Claude Opus 4.7 1M Medium",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-medium-fast",
+    name: "Claude Opus 4.7 1M Medium Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-high",
+    name: "Claude Opus 4.7 1M High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-high-fast",
+    name: "Claude Opus 4.7 1M High Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-xhigh",
+    name: "Claude Opus 4.7 1M",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-xhigh-fast",
+    name: "Claude Opus 4.7 1M Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-max",
+    name: "Claude Opus 4.7 1M Max",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-max-fast",
+    name: "Claude Opus 4.7 1M Max Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-thinking-low",
+    name: "Claude Opus 4.7 1M Low Thinking",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-thinking-low-fast",
+    name: "Claude Opus 4.7 1M Low Thinking Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-thinking-medium",
+    name: "Claude Opus 4.7 1M Medium Thinking",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-thinking-medium-fast",
+    name: "Claude Opus 4.7 1M Medium Thinking Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-thinking-high",
+    name: "Claude Opus 4.7 1M High Thinking",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-thinking-high-fast",
+    name: "Claude Opus 4.7 1M High Thinking Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-thinking-xhigh",
+    name: "Claude Opus 4.7 1M Thinking",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-thinking-xhigh-fast",
+    name: "Claude Opus 4.7 1M Thinking Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-thinking-max",
+    name: "Claude Opus 4.7 1M Max Thinking",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-opus-4-7-thinking-max-fast",
+    name: "Claude Opus 4.7 1M Max Thinking Fast",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-4.6-opus-high",
+    name: "Claude Opus 4.6 1M",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-4.6-opus-max",
+    name: "Claude Opus 4.6 1M Max",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-4.6-opus-high-thinking",
+    name: "Claude Opus 4.6 1M Thinking",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-4.6-opus-max-thinking",
+    name: "Claude Opus 4.6 1M Max Thinking",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-4.5-opus-high",
+    name: "Claude Opus 4.5",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-4.5-opus-high-thinking",
+    name: "Claude Opus 4.5 Thinking",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-haiku-5-5-low",
+    name: "Claude Haiku 5.5 Low No Thinking",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-haiku-5-5-medium",
+    name: "Claude Haiku 5.5 Medium No Thinking",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-haiku-5-5-high",
+    name: "Claude Haiku 5.5 High No Thinking",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-haiku-5-5-xhigh",
+    name: "Claude Haiku 5.5 Extra High No Thinking",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-haiku-5-5-max",
+    name: "Claude Haiku 5.5 Max No Thinking",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-haiku-5-5-thinking-low",
+    name: "Claude Haiku 5.5 Low",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-haiku-5-5-thinking-medium",
+    name: "Claude Haiku 5.5 Medium",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-haiku-5-5-thinking-high",
+    name: "Claude Haiku 5.5 High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-haiku-5-5-thinking-xhigh",
+    name: "Claude Haiku 5.5 Extra High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-haiku-5-5-thinking-max",
+    name: "Claude Haiku 5.5 Max",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-4.5-sonnet",
+    name: "Claude Sonnet 4.5",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-4.5-sonnet-thinking",
+    name: "Claude Sonnet 4.5 Thinking",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-4-sonnet",
+    name: "Claude Sonnet 4",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  {
+    id: "claude-4-sonnet-thinking",
+    name: "Claude Sonnet 4 Thinking",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32000,
+  },
+  // Other
+  {
+    id: "cursor-grok-4.5-high",
+    name: "Grok 4.5",
+    reasoning: true,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "cursor-grok-4.5-high-fast",
+    name: "Grok 4.5 Fast",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "cursor-grok-4.6-low",
+    name: "Grok 4.6 Low",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "cursor-grok-4.6-low-fast",
+    name: "Grok 4.6 Low Fast",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "cursor-grok-4.6-medium",
+    name: "Grok 4.6 Medium",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "cursor-grok-4.6-medium-fast",
+    name: "Grok 4.6 Medium Fast",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "cursor-grok-4.6-high",
+    name: "Grok 4.6",
+    reasoning: true,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "cursor-grok-4.6-high-fast",
+    name: "Grok 4.6 Fast",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "cursor-grok-4.6-xhigh",
+    name: "Grok 4.6 Extra High",
+    reasoning: true,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "cursor-grok-4.6-xhigh-fast",
+    name: "Grok 4.6 Extra High Fast",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "cursor-grok-4.5-low",
+    name: "Grok 4.5 Low",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "cursor-grok-4.5-low-fast",
+    name: "Grok 4.5 Low Fast",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "cursor-grok-4.5-medium",
+    name: "Grok 4.5 Medium",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "cursor-grok-4.5-medium-fast",
+    name: "Grok 4.5 Medium Fast",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
   // Gemini
-  { id: "gemini-3-pro", name: "Gemini 3 Pro", reasoning: false, contextWindow: 1000000, maxTokens: 65536 },
-  { id: "gemini-3-flash", name: "Gemini 3 Flash", reasoning: false, contextWindow: 1000000, maxTokens: 65536 },
+  {
+    id: "gemini-3.7-flash-high",
+    name: "Gemini 3.7 Flash",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 65536,
+  },
+  {
+    id: "gemini-4-argon-low",
+    name: "Gemini 4 Argon Low",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 65536,
+  },
+  {
+    id: "gemini-4-argon-medium",
+    name: "Gemini 4 Argon Medium",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 65536,
+  },
+  {
+    id: "gemini-4-argon-high",
+    name: "Gemini 4 Argon High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 65536,
+  },
+  {
+    id: "gemini-3.8-flash-low",
+    name: "Gemini 3.8 Flash Low",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 65536,
+  },
+  {
+    id: "gemini-3.8-flash-medium",
+    name: "Gemini 3.8 Flash Medium",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 65536,
+  },
+  {
+    id: "gemini-3.8-flash-high",
+    name: "Gemini 3.8 Flash High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 65536,
+  },
+  {
+    id: "gemini-3.7-flash-low",
+    name: "Gemini 3.7 Flash Low",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 65536,
+  },
+  {
+    id: "gemini-3.7-flash-medium",
+    name: "Gemini 3.7 Flash Medium",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 65536,
+  },
+  {
+    id: "gemini-3.6-flash-minimal",
+    name: "Gemini 3.6 Flash Minimal",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 65536,
+  },
+  {
+    id: "gemini-3.6-flash-low",
+    name: "Gemini 3.6 Flash Low",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 65536,
+  },
+  {
+    id: "gemini-3.6-flash-medium",
+    name: "Gemini 3.6 Flash Medium",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 65536,
+  },
+  {
+    id: "gemini-3.6-flash-high",
+    name: "Gemini 3.6 Flash",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 65536,
+  },
+  {
+    id: "gemini-3.1-pro",
+    name: "Gemini 3.1 Pro",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 65536,
+  },
+  {
+    id: "gemini-3-flash",
+    name: "Gemini 3 Flash",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 65536,
+  },
+  {
+    id: "gemini-3.5-flash",
+    name: "Gemini 3.5 Flash",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 65536,
+  },
   // Grok
-  { id: "grok", name: "Grok", reasoning: false, contextWindow: 131072, maxTokens: 32768 },
+  {
+    id: "grok-4.7-low",
+    name: "Grok 4.7 Low",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "grok-4.7-low-fast",
+    name: "Grok 4.7 Low Fast",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "grok-4.7-medium",
+    name: "Grok 4.7 Medium",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "grok-4.7-medium-fast",
+    name: "Grok 4.7 Medium Fast",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "grok-4.7-high",
+    name: "Grok 4.7 High",
+    reasoning: true,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "grok-4.7-high-fast",
+    name: "Grok 4.7 High Fast",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "grok-4.7-xhigh",
+    name: "Grok 4.7 Extra High",
+    reasoning: true,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  {
+    id: "grok-4.7-xhigh-fast",
+    name: "Grok 4.7 Extra High Fast",
+    reasoning: false,
+    contextWindow: 131072,
+    maxTokens: 32768,
+  },
+  // Muse
+  {
+    id: "muse-wonder-1.0-minimal",
+    name: "Muse Wonder Minimal",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "muse-wonder-1.0-low",
+    name: "Muse Wonder Low",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "muse-wonder-1.0-medium",
+    name: "Muse Wonder Medium",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "muse-wonder-1.0-high",
+    name: "Muse Wonder High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "muse-wonder-1.0-xhigh",
+    name: "Muse Wonder Extra High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "muse-wonder-1.0-max",
+    name: "Muse Wonder Max",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "muse-spark-1.3-minimal",
+    name: "Muse Spark 1.3 1M Minimal",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "muse-spark-1.3-low",
+    name: "Muse Spark 1.3 1M Low",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "muse-spark-1.3-medium",
+    name: "Muse Spark 1.3 1M Medium",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "muse-spark-1.3-high",
+    name: "Muse Spark 1.3 1M",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "muse-spark-1.3-xhigh",
+    name: "Muse Spark 1.3 1M Extra High",
+    reasoning: true,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  {
+    id: "muse-spark-1.3-max",
+    name: "Muse Spark 1.3 1M Max",
+    reasoning: false,
+    contextWindow: 1000000,
+    maxTokens: 32768,
+  },
+  // Kimi
+  {
+    id: "kimi-k3-low",
+    name: "Kimi K3 Low",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "kimi-k3-high",
+    name: "Kimi K3 High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "kimi-k3-max",
+    name: "Kimi K3",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "kimi-k2.7-code",
+    name: "Kimi K2.7 Code",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  // GLM
+  {
+    id: "glm-5.2-high",
+    name: "GLM 5.2",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "glm-5.2-max",
+    name: "GLM 5.2 Max",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  // DeepSeek
+  {
+    id: "deepseek-v41-flash-1017-none",
+    name: "DeepSeek V4.1 Flash 1017 None",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "deepseek-v41-flash-1017-low",
+    name: "DeepSeek V4.1 Flash 1017 Low",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "deepseek-v41-flash-1017-medium",
+    name: "DeepSeek V4.1 Flash 1017 Medium",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "deepseek-v41-flash-1017-high",
+    name: "DeepSeek V4.1 Flash 1017 High",
+    reasoning: true,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
+  {
+    id: "deepseek-v41-flash-1017-max",
+    name: "DeepSeek V4.1 Flash 1017 Max",
+    reasoning: false,
+    contextWindow: 200000,
+    maxTokens: 32768,
+  },
 ];
 
 /** Fast lookup: static model id → definition */
@@ -117,56 +1975,10 @@ interface ModelVariants {
 }
 
 const MODEL_MAP: Record<string, ModelVariants> = {
-  "claude-sonnet-4-5": {
-    default: "sonnet-4.5",
-    minimal: "sonnet-4.5-thinking",
-    low: "sonnet-4.5-thinking",
-    medium: "sonnet-4.5-thinking",
-    high: "sonnet-4.5-thinking",
-    xhigh: "sonnet-4.5-thinking",
-  },
-  "claude-sonnet-4-6": {
-    default: "sonnet-4.6",
-    minimal: "sonnet-4.6-thinking",
-    low: "sonnet-4.6-thinking",
-    medium: "sonnet-4.6-thinking",
-    high: "sonnet-4.6-thinking",
-    xhigh: "sonnet-4.6-thinking",
-  },
-  "claude-opus-4-5": {
-    default: "opus-4.5",
-    minimal: "opus-4.5-thinking",
-    low: "opus-4.5-thinking",
-    medium: "opus-4.5-thinking",
-    high: "opus-4.5-thinking",
-    xhigh: "opus-4.5-thinking",
-  },
-  "claude-opus-4-6": {
-    default: "opus-4.6",
-    minimal: "opus-4.6-thinking",
-    low: "opus-4.6-thinking",
-    medium: "opus-4.6-thinking",
-    high: "opus-4.6-thinking",
-    xhigh: "opus-4.6-thinking",
-  },
   "gpt-5.2": {
     default: "gpt-5.2",
     high: "gpt-5.2-high",
     xhigh: "gpt-5.2-high",
-  },
-  "gpt-5.2-codex": {
-    default: "gpt-5.2-codex",
-    minimal: "gpt-5.2-codex-low",
-    low: "gpt-5.2-codex-low",
-    high: "gpt-5.2-codex-high",
-    xhigh: "gpt-5.2-codex-xhigh",
-  },
-  "gpt-5.2-codex-fast": {
-    default: "gpt-5.2-codex-fast",
-    minimal: "gpt-5.2-codex-low-fast",
-    low: "gpt-5.2-codex-low-fast",
-    high: "gpt-5.2-codex-high-fast",
-    xhigh: "gpt-5.2-codex-xhigh-fast",
   },
   "gpt-5.3-codex": {
     default: "gpt-5.3-codex",
@@ -185,20 +1997,14 @@ const MODEL_MAP: Record<string, ModelVariants> = {
   "gpt-5.1": {
     default: "gpt-5.1-high",
   },
-  "gpt-5.1-codex-max": {
-    default: "gpt-5.1-codex-max",
-    high: "gpt-5.1-codex-max-high",
-    xhigh: "gpt-5.1-codex-max-high",
-  },
-  "gemini-3-pro-preview": { default: "gemini-3-pro" },
   "gemini-3-flash-preview": { default: "gemini-3-flash" },
-  "grok-code-fast-1": { default: "grok" },
 };
 
 const cursorDefaultToCanonical = new Map<string, string>();
 const allMappedCursorIds = new Set<string>();
 for (const [canonicalId, variants] of Object.entries(MODEL_MAP)) {
-  if (variants.default) cursorDefaultToCanonical.set(variants.default, canonicalId);
+  if (variants.default)
+    cursorDefaultToCanonical.set(variants.default, canonicalId);
   for (const cursorId of Object.values(variants)) {
     if (cursorId) allMappedCursorIds.add(cursorId);
   }
@@ -258,11 +2064,17 @@ function inferReasoning(id: string): boolean {
 function parseAgentModelsOutput(output: string): CursorModelDef[] {
   const results: CursorModelDef[] = [];
   // Match lines like: "model-id - Display Name  (optional flags)"
-  const lineRe = /^([a-zA-Z0-9][a-zA-Z0-9._-]*)\s+-\s+(.+?)(?:\s+\((?:current|default|current,\s*default)\))?$/;
+  const lineRe =
+    /^([a-zA-Z0-9][a-zA-Z0-9._-]*)\s+-\s+(.+?)(?:\s+\((?:current|default|current,\s*default)\))?$/;
 
   for (const line of output.split("\n")) {
     const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith("Available") || trimmed.startsWith("Tip:")) continue;
+    if (
+      !trimmed ||
+      trimmed.startsWith("Available") ||
+      trimmed.startsWith("Tip:")
+    )
+      continue;
     const match = lineRe.exec(trimmed);
     if (!match) continue;
 
@@ -303,11 +2115,17 @@ function runAgentModels(agentPath: string): Promise<CursorModelDef[]> {
 
     const timeout = setTimeout(() => {
       child.kill("SIGTERM");
-      reject(new Error(`agent models timed out after ${DISCOVERY_TIMEOUT_MS}ms`));
+      reject(
+        new Error(`agent models timed out after ${DISCOVERY_TIMEOUT_MS}ms`),
+      );
     }, DISCOVERY_TIMEOUT_MS);
 
-    child.stdout?.on("data", (chunk: Buffer) => { stdout += chunk.toString(); });
-    child.stderr?.on("data", (chunk: Buffer) => { stderr += chunk.toString(); });
+    child.stdout?.on("data", (chunk: Buffer) => {
+      stdout += chunk.toString();
+    });
+    child.stderr?.on("data", (chunk: Buffer) => {
+      stderr += chunk.toString();
+    });
 
     child.on("error", (err) => {
       clearTimeout(timeout);
@@ -317,7 +2135,9 @@ function runAgentModels(agentPath: string): Promise<CursorModelDef[]> {
     child.on("close", (code) => {
       clearTimeout(timeout);
       if (code !== 0) {
-        reject(new Error(`agent models exited with code ${code}: ${stderr.trim()}`));
+        reject(
+          new Error(`agent models exited with code ${code}: ${stderr.trim()}`),
+        );
         return;
       }
       const models = parseAgentModelsOutput(stdout);
@@ -368,7 +2188,9 @@ function spawnAgentPrint(
  * The placeholder preserves the image's MIME type and byte-size so the model
  * can at least acknowledge that an image was intended.
  */
-function contentBlockToText(block: TextContent | import("@mariozechner/pi-ai").ImageContent): string {
+function contentBlockToText(
+  block: TextContent | import("@mariozechner/pi-ai").ImageContent,
+): string {
   if (block.type === "text") return block.text;
   // ImageContent: { type: "image", data: string (base64), mimeType: string }
   const bytes = Math.round((block.data.length * 3) / 4);
@@ -462,7 +2284,10 @@ export function serializeContext(context: Context): string {
 
 interface CursorAssistantEvent {
   type: "assistant";
-  message: { role: "assistant"; content: Array<{ type: "text"; text: string }> };
+  message: {
+    role: "assistant";
+    content: Array<{ type: "text"; text: string }>;
+  };
   session_id: string;
 }
 
@@ -569,7 +2394,8 @@ function streamCursorCli(
 
     const setTiming = () => {
       output.duration = Date.now() - startTime;
-      output.ttft = firstTokenTime != null ? firstTokenTime - startTime : undefined;
+      output.ttft =
+        firstTokenTime != null ? firstTokenTime - startTime : undefined;
     };
 
     try {
@@ -586,10 +2412,13 @@ function streamCursorCli(
       // Prompt stays off argv — see spawnAgentPrint / Linux MAX_ARG_STRLEN.
       const args = [
         "--print",
-        "--output-format", "stream-json",
-        "--model", cliModelId,
+        "--output-format",
+        "stream-json",
+        "--model",
+        cliModelId,
         "--trust",
-        "--workspace", workspacePath,
+        "--workspace",
+        workspacePath,
       ];
 
       if (process.env["CURSOR_API_KEY"]) {
@@ -629,7 +2458,11 @@ function streamCursorCli(
             if (!textBlockOpen) {
               output.content.push({ type: "text", text: "" });
               const idx = output.content.length - 1;
-              stream.push({ type: "text_start", contentIndex: idx, partial: output });
+              stream.push({
+                type: "text_start",
+                contentIndex: idx,
+                partial: output,
+              });
               textBlockOpen = true;
             }
 
@@ -637,7 +2470,12 @@ function streamCursorCli(
             const textBlock = output.content[idx] as TextContent;
             textBlock.text += block.text;
             accumulatedText += block.text;
-            stream.push({ type: "text_delta", contentIndex: idx, delta: block.text, partial: output });
+            stream.push({
+              type: "text_delta",
+              contentIndex: idx,
+              delta: block.text,
+              partial: output,
+            });
           }
           return;
         }
@@ -653,20 +2491,32 @@ function streamCursorCli(
           if (tce.subtype === "started") {
             const payload = tce.tool_call[cliKey];
             const argsSnippet = JSON.stringify(payload.args ?? {});
-            const brief = argsSnippet.length > 120 ? argsSnippet.slice(0, 120) + "…" : argsSnippet;
+            const brief =
+              argsSnippet.length > 120
+                ? argsSnippet.slice(0, 120) + "…"
+                : argsSnippet;
             const marker = `\n⏳ [${toolName}] ${brief}\n`;
 
             if (!textBlockOpen) {
               output.content.push({ type: "text", text: "" });
               const idx = output.content.length - 1;
-              stream.push({ type: "text_start", contentIndex: idx, partial: output });
+              stream.push({
+                type: "text_start",
+                contentIndex: idx,
+                partial: output,
+              });
               textBlockOpen = true;
             }
             const idx = output.content.length - 1;
             const textBlock = output.content[idx] as TextContent;
             textBlock.text += marker;
             accumulatedText += marker;
-            stream.push({ type: "text_delta", contentIndex: idx, delta: marker, partial: output });
+            stream.push({
+              type: "text_delta",
+              contentIndex: idx,
+              delta: marker,
+              partial: output,
+            });
           }
         }
       });
@@ -677,7 +2527,12 @@ function streamCursorCli(
 
           if (textBlockOpen) {
             const idx = output.content.length - 1;
-            stream.push({ type: "text_end", contentIndex: idx, content: accumulatedText, partial: output });
+            stream.push({
+              type: "text_end",
+              contentIndex: idx,
+              content: accumulatedText,
+              partial: output,
+            });
             textBlockOpen = false;
           }
 
@@ -693,7 +2548,8 @@ function streamCursorCli(
           if (code !== 0 && !accumulatedText) {
             const stderr = stderrChunks.join("").trim();
             output.stopReason = "error";
-            output.errorMessage = stderr || `Cursor CLI exited with code ${code}`;
+            output.errorMessage =
+              stderr || `Cursor CLI exited with code ${code}`;
             setTiming();
             stream.push({ type: "error", reason: "error", error: output });
             stream.end();
@@ -719,7 +2575,8 @@ function streamCursorCli(
       });
     } catch (error) {
       output.stopReason = options?.signal?.aborted ? "aborted" : "error";
-      output.errorMessage = error instanceof Error ? error.message : String(error);
+      output.errorMessage =
+        error instanceof Error ? error.message : String(error);
       setTiming();
       stream.push({ type: "error", reason: output.stopReason, error: output });
       stream.end();
@@ -768,8 +2625,12 @@ function runAgentStatus(agentPath: string): Promise<string> {
       stdio: ["ignore", "pipe", "pipe"],
       env: process.env,
     });
-    child.stdout?.on("data", (c: Buffer) => { out += c.toString(); });
-    child.stderr?.on("data", (c: Buffer) => { out += c.toString(); });
+    child.stdout?.on("data", (c: Buffer) => {
+      out += c.toString();
+    });
+    child.stderr?.on("data", (c: Buffer) => {
+      out += c.toString();
+    });
     child.on("error", (err) => reject(err));
     child.on("close", () => resolve(out.trim()));
   });
@@ -807,9 +2668,7 @@ function toProviderModels(defs: CursorModelDef[]) {
 
 export default async function (pi: ExtensionAPI) {
   const agentPath =
-    process.env["CURSOR_AGENT_PATH"] ??
-    process.env["AGENT_PATH"] ??
-    "agent";
+    process.env["CURSOR_AGENT_PATH"] ?? process.env["AGENT_PATH"] ?? "agent";
 
   // Attempt dynamic model discovery; fall back to static list on any failure.
   let modelDefs: CursorModelDef[];
@@ -834,7 +2693,10 @@ export default async function (pi: ExtensionAPI) {
   pi.registerCommand("cursor-login", {
     description: "Log in to Cursor (runs `agent login`)",
     handler: async (_args, ctx) => {
-      ctx.ui.notify("Starting Cursor login (NO_OPEN_BROWSER=1 — copy the URL from the output)…", "info");
+      ctx.ui.notify(
+        "Starting Cursor login (NO_OPEN_BROWSER=1 — copy the URL from the output)…",
+        "info",
+      );
       try {
         await runAgentLogin(agentPath);
         ctx.ui.notify("Cursor login successful.", "info");

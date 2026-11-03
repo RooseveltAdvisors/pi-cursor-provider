@@ -1,12 +1,12 @@
 {
   "name": "@netandreus/pi-cursor-provider",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "author": {
     "name": "Andrei Tokarchuk ",
     "email": "netandreus@gmail.com",
     "url": "https://tokarchuk.ru"
   },
-  "description": "Pi Coding Agent custom provider that routes requests through the Cursor Agent CLI — use your Cursor subscription models (Claude, GPT, Gemini, Grok…) inside Pi.",
+  "description": "Pi Coding Agent custom provider that routes requests through the Cursor Agent CLI \u2014 use your Cursor subscription models (Claude, GPT, Gemini, Grok\u2026) inside Pi.",
   "type": "module",
   "keywords": [
     "pi-package",

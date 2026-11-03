@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.6] - 2026-11-03
+
+### Changed
+
+- Refreshed the static fallback model catalog from `agent models` output of Cursor Agent CLI v2026.10.22-27dcf5f: 270 models, grouped by family, with context-window and max-output attributes taken from the vendor's own model names.
+
+### Fixed
+
+- Pruned nine dead `MODEL_MAP` families (claude-sonnet/opus-4-5 and 4-6, gpt-5.2-codex and -fast, gpt-5.1-codex-max, gemini-3-pro-preview, grok-code-fast-1) whose variant ids the CLI no longer accepts; typing one of those canonical ids now passes through to the CLI instead of being translated to a rejected id.
+- Repaired the lint gate: migrated `biome.json` to the 2.4.3 schema, matched the formatter's indent style to the existing 2-space files, and applied the safe autofixes.
+
 ## [0.1.5]
 
 ### Fixed
