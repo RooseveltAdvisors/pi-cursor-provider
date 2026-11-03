@@ -10,7 +10,13 @@
  *   2) stdin transport (the fixed contract) spawns and delivers the full prompt
  */
 import { spawn } from "node:child_process";
-import { chmodSync, mkdtempSync, writeFileSync, readFileSync, rmSync } from "node:fs";
+import {
+  chmodSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
@@ -67,9 +73,13 @@ chmodSync(fakeAgent, 0o755);
     hit = err;
   }
   if (!hit || (hit.errno !== 7 && hit.errno !== -7 && hit.code !== "E2BIG")) {
-    fail(`expected argv spawn E2BIG, got errno=${hit && hit.errno} code=${hit && hit.code}`);
+    fail(
+      `expected argv spawn E2BIG, got errno=${hit && hit.errno} code=${hit && hit.code}`,
+    );
   }
-  pass(`argv transport E2BIG at prompt ${OVERSIZE} bytes (${hit.code || hit.errno})`);
+  pass(
+    `argv transport E2BIG at prompt ${OVERSIZE} bytes (${hit.code || hit.errno})`,
+  );
 }
 
 // 2) Fixed stdin transport must spawn and deliver the full prompt.

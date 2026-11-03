@@ -12,7 +12,9 @@
 const major = Number(process.versions.node.split(".")[0]);
 const minor = Number(process.versions.node.split(".")[1] ?? 0);
 if (major < 23 || (major === 23 && minor < 6)) {
-  console.log(`SKIP: system-prompt transcript test needs Node >= 23.6 (got ${process.versions.node})`);
+  console.log(
+    `SKIP: system-prompt transcript test needs Node >= 23.6 (got ${process.versions.node})`,
+  );
   process.exit(0);
 }
 
@@ -34,7 +36,9 @@ function pass(message) {
 }
 function equal(actual, expected, message) {
   if (actual !== expected) {
-    fail(`${message}\n  expected: ${JSON.stringify(expected)}\n  actual:   ${JSON.stringify(actual)}`);
+    fail(
+      `${message}\n  expected: ${JSON.stringify(expected)}\n  actual:   ${JSON.stringify(actual)}`,
+    );
   }
 }
 
@@ -61,7 +65,9 @@ equal(
 
 const prompt = serializeContext(transcriptContext);
 if (!prompt.startsWith("[System]\nYou are an expert coding assistant."))
-  fail(`serializeContext dropped the [System] block: ${JSON.stringify(prompt.slice(0, 120))}`);
+  fail(
+    `serializeContext dropped the [System] block: ${JSON.stringify(prompt.slice(0, 120))}`,
+  );
 if (!prompt.includes("[User]\nhi"))
   fail(`serializeContext lost the user turn: ${JSON.stringify(prompt)}`);
 pass("Pi 1.x transcript system message reaches the [System] block");
@@ -69,8 +75,18 @@ pass("Pi 1.x transcript system message reaches the [System] block");
 // 2. Later system messages patch sections by name, and null removes one.
 const patched = {
   messages: [
-    { role: "system", content: "Base.", sections: { rules: "old rules" }, timestamp: 0 },
-    { role: "system", content: "", sections: { rules: "new rules", docs: "docs block" }, timestamp: 1 },
+    {
+      role: "system",
+      content: "Base.",
+      sections: { rules: "old rules" },
+      timestamp: 0,
+    },
+    {
+      role: "system",
+      content: "",
+      sections: { rules: "new rules", docs: "docs block" },
+      timestamp: 1,
+    },
     { role: "system", sections: { docs: null }, timestamp: 2 },
   ],
 };
@@ -86,12 +102,18 @@ const legacy = {
   systemPrompt: "Legacy prompt.",
   messages: transcriptContext.messages,
 };
-equal(resolveSystemPrompt(legacy), "Legacy prompt.", "legacy systemPrompt must win");
+equal(
+  resolveSystemPrompt(legacy),
+  "Legacy prompt.",
+  "legacy systemPrompt must win",
+);
 pass("legacy context.systemPrompt still wins");
 
 // 4. No system messages and no field means no prompt, not a crash.
 equal(
-  resolveSystemPrompt({ messages: [{ role: "user", content: "hi", timestamp: 0 }] }),
+  resolveSystemPrompt({
+    messages: [{ role: "user", content: "hi", timestamp: 0 }],
+  }),
   "",
   "a transcript without system messages has no prompt",
 );
