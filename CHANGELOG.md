@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.7] - 2026-11-03
+
+### Fixed
+
+- Tool calls now render as human-readable markers instead of raw JSON argument dumps: `⏳ [Shell] <command>` (primary argument or the vendor's description, bookkeeping fields such as `toolCallId` hidden), and completed calls were no longer dropped — `✓` markers carry the exit code, timing, and short output (stdout/content), `✗` markers carry blocked/error verdicts.
+- Tool-key detection matches the `*ToolCall` suffix instead of trusting the vendor's sibling key order.
+
 ## [0.1.6] - 2026-11-03
 
 ### Changed

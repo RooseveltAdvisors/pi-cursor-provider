@@ -2302,6 +2302,8 @@ interface CursorAssistantEvent {
  */
 interface CursorToolCallPayload {
   args: Record<string, unknown>;
+  /** The vendor's own human description of the call, when it sends one. */
+  description?: string;
   result?: {
     success?: Record<string, unknown>;
     rejected?: { reason?: string };
@@ -2361,6 +2363,149 @@ const TOOL_NAME_MAP: Record<string, string> = {
 /** Convert a CLI tool event key (e.g. "shellToolCall") to a Pi tool name. */
 function toPiToolName(cliKey: string): string {
   return TOOL_NAME_MAP[cliKey] ?? cliKey.replace(/ToolCall$/, "");
+}
+
+// ---------------------------------------------------------------------------
+// Tool marker formatting — human-readable stand-ins for Pi toolcall events
+// ---------------------------------------------------------------------------
+
+/**
+ * Pick the tool-name key out of a `tool_call` event. The outer object also
+ * carries siblings such as `toolCallId`, and the vendor controls their
+ * order, so match the `*ToolCall` suffix instead of trusting position.
+ */
+export function toolKeyOf(
+  toolCall: Record<string, unknown>,
+): string | undefined {
+  const keys = Object.keys(toolCall);
+  return keys.find((key) => key.endsWith("ToolCall")) ?? keys[0];
+}
+
+/** Argument keys that identify what the tool operates on. */
+const PRIMARY_ARG_KEYS = [
+  "command",
+  "path",
+  "pattern",
+  "query",
+  "url",
+  "file_path",
+  "filePath",
+  "target",
+] as const;
+
+/** Args keys the vendor fills with bookkeeping; never worth showing. */
+const INTERNAL_ARG_KEYS = new Set([
+  "adminCommandDenylist",
+  "closeStdin",
+  "completedAtMs",
+  "conversationId",
+  "description",
+  "fileOutputThresholdBytes",
+  "hardTimeout",
+  "hasInputRedirect",
+  "hasOutputRedirect",
+  "hookAdditionalContexts",
+  "isBackground",
+  "parsingResult",
+  "requestId",
+  "simpleCommands",
+  "skipApproval",
+  "startedAtMs",
+  "timeout",
+  "timeoutBehavior",
+  "toolCallId",
+  "workingDirectory",
+]);
+
+function sanitizeInline(value: string): string {
+  return value.replace(/\s+/g, " ").trim();
+}
+
+function truncate(value: string, max: number): string {
+  return value.length > max ? `${value.slice(0, max - 1)}…` : value;
+}
+
+function stripAnsi(value: string): string {
+  // biome-ignore lint/suspicious/noControlCharactersInRegex: ANSI SGR escapes are exactly what this strips
+  return value.replace(/\u001b\[[0-9;]*m/g, "");
+}
+
+/**
+ * One human-readable line for a tool call that just started: the exact
+ * primary argument (command, path, pattern …) when the payload has one,
+ * else the vendor's own description, else the non-bookkeeping args. The
+ * raw args dump it replaces carried toolCallId/requestId noise and broke
+ * across embedded newlines.
+ */
+export function formatToolStart(
+  name: string,
+  payload: CursorToolCallPayload,
+): string {
+  const args = payload.args ?? {};
+  for (const key of PRIMARY_ARG_KEYS) {
+    const value = args[key];
+    if (typeof value === "string" && value.trim()) {
+      return `⏳ [${name}] ${truncate(sanitizeInline(value), 120)}`;
+    }
+  }
+  for (const candidate of [payload.description, args.description]) {
+    if (typeof candidate === "string" && candidate.trim()) {
+      return `⏳ [${name}] ${truncate(sanitizeInline(candidate), 120)}`;
+    }
+  }
+  const visible = Object.fromEntries(
+    Object.entries(args).filter(
+      ([key, value]) =>
+        !INTERNAL_ARG_KEYS.has(key) &&
+        (typeof value === "string" ||
+          typeof value === "number" ||
+          typeof value === "boolean"),
+    ),
+  );
+  const fallback = JSON.stringify(visible) ?? "{}";
+  return `⏳ [${name}] ${truncate(sanitizeInline(fallback), 120)}`;
+}
+
+/**
+ * One human-readable marker for a finished tool call: the vendor's verdict
+ * plus its short output (stdout/content), or undefined when the payload
+ * carries nothing to report. Completed calls used to be dropped entirely,
+ * so a turn showed call traces and no results.
+ */
+export function formatToolResult(
+  name: string,
+  result: CursorToolCallPayload["result"],
+): string | undefined {
+  if (!result) return undefined;
+  if (result.success) {
+    const success = result.success;
+    const parts = [`✓ [${name}]`];
+    if (typeof success.exitCode === "number") {
+      parts.push(`exit ${success.exitCode}`);
+    }
+    if (typeof success.executionTime === "number") {
+      parts.push(`${success.executionTime}ms`);
+    }
+    const head =
+      parts.length > 1 ? `${parts[0]} ${parts.slice(1).join(" · ")}` : parts[0];
+    for (const key of ["stdout", "content", "output", "text", "result"]) {
+      const value = success[key];
+      if (typeof value === "string" && value.trim()) {
+        const body = truncate(stripAnsi(value).replace(/\s+$/, ""), 400);
+        return `${head}\n${body}`;
+      }
+    }
+    return head;
+  }
+  if (result.rejected) {
+    const reason = sanitizeInline(result.rejected.reason ?? "");
+    return `✗ [${name}] blocked${reason ? `: ${truncate(reason, 120)}` : ""}`;
+  }
+  if (result.error) {
+    const message = sanitizeInline(result.error.message ?? "");
+    return `✗ [${name}]${message ? ` ${truncate(message, 160)}` : " failed"}`;
+  }
+  return undefined;
 }
 
 // ---------------------------------------------------------------------------
@@ -2485,43 +2630,43 @@ function streamCursorCli(
         }
 
         // Tool calls are rendered as informational text, not as Pi toolcall_*
-        // events, to prevent Pi's agentic loop from re-invoking streamSimple.
+        // events, to prevent Pi's agentic loop from re-invoking streamSimple:
+        // the Cursor CLI runs its own tool loop inside this one Pi turn.
         if (event.type === "tool_call") {
           const tce = event as CursorToolCallEvent;
-          const cliKey = Object.keys(tce.tool_call)[0];
+          const cliKey = toolKeyOf(tce.tool_call);
           if (!cliKey) return;
+          const payload = tce.tool_call[cliKey];
           const toolName = toPiToolName(cliKey);
+          const marker =
+            tce.subtype === "started"
+              ? formatToolStart(toolName, payload)
+              : tce.subtype === "completed"
+                ? formatToolResult(toolName, payload.result)
+                : undefined;
+          if (!marker) return;
+          const text = `\n${marker}\n`;
 
-          if (tce.subtype === "started") {
-            const payload = tce.tool_call[cliKey];
-            const argsSnippet = JSON.stringify(payload.args ?? {});
-            const brief =
-              argsSnippet.length > 120
-                ? argsSnippet.slice(0, 120) + "…"
-                : argsSnippet;
-            const marker = `\n⏳ [${toolName}] ${brief}\n`;
-
-            if (!textBlockOpen) {
-              output.content.push({ type: "text", text: "" });
-              const idx = output.content.length - 1;
-              stream.push({
-                type: "text_start",
-                contentIndex: idx,
-                partial: output,
-              });
-              textBlockOpen = true;
-            }
+          if (!textBlockOpen) {
+            output.content.push({ type: "text", text: "" });
             const idx = output.content.length - 1;
-            const textBlock = output.content[idx] as TextContent;
-            textBlock.text += marker;
-            accumulatedText += marker;
             stream.push({
-              type: "text_delta",
+              type: "text_start",
               contentIndex: idx,
-              delta: marker,
               partial: output,
             });
+            textBlockOpen = true;
           }
+          const idx = output.content.length - 1;
+          const textBlock = output.content[idx] as TextContent;
+          textBlock.text += text;
+          accumulatedText += text;
+          stream.push({
+            type: "text_delta",
+            contentIndex: idx,
+            delta: text,
+            partial: output,
+          });
         }
       });
 
