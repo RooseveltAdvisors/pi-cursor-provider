@@ -2840,7 +2840,8 @@ interface ModelsCache {
 function loadModelsCache(): CursorModelDef[] | null {
   try {
     const parsed = JSON.parse(readFileSync(CACHE_PATH, "utf-8")) as ModelsCache;
-    if (Array.isArray(parsed?.models) && parsed.models.length > 0) return parsed.models;
+    if (Array.isArray(parsed?.models) && parsed.models.length > 0)
+      return parsed.models;
   } catch {
     // no cache yet
   }
@@ -2864,14 +2865,18 @@ function saveModelsCache(models: CursorModelDef[]): void {
 function cacheIsFresh(): boolean {
   try {
     const parsed = JSON.parse(readFileSync(CACHE_PATH, "utf-8")) as ModelsCache;
-    return typeof parsed?.at === "number" && Date.now() - parsed.at < CACHE_TTL_MS;
+    return (
+      typeof parsed?.at === "number" && Date.now() - parsed.at < CACHE_TTL_MS
+    );
   } catch {
     return false;
   }
 }
 
 /** Refresh cache from `agent models`. Safe to call without awaiting at session start. */
-async function refreshModelsCache(agentPath: string): Promise<CursorModelDef[] | null> {
+async function refreshModelsCache(
+  agentPath: string,
+): Promise<CursorModelDef[] | null> {
   try {
     const defs = await runAgentModels(agentPath);
     saveModelsCache(defs);
@@ -2881,7 +2886,10 @@ async function refreshModelsCache(agentPath: string): Promise<CursorModelDef[] |
   }
 }
 
-function registerCursorProvider(pi: ExtensionAPI, modelDefs: CursorModelDef[]): void {
+function registerCursorProvider(
+  pi: ExtensionAPI,
+  modelDefs: CursorModelDef[],
+): void {
   pi.registerProvider("cursor", {
     baseUrl: "cli://cursor-agent",
     apiKey: "CURSOR_API_KEY",
@@ -2893,9 +2901,7 @@ function registerCursorProvider(pi: ExtensionAPI, modelDefs: CursorModelDef[]): 
 
 export default function (pi: ExtensionAPI) {
   const agentPath =
-    process.env["CURSOR_AGENT_PATH"] ??
-    process.env["AGENT_PATH"] ??
-    "agent";
+    process.env["CURSOR_AGENT_PATH"] ?? process.env["AGENT_PATH"] ?? "agent";
 
   // Non-blocking startup: register from cache (or static list) immediately.
   // Background discovery is deferred to session_start so factory-only
